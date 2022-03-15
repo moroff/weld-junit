@@ -316,7 +316,7 @@ public abstract class AbstractWeldInitiator implements Instance<Object>, Contain
 
     }
 
-    protected static abstract class AbstractBuilder<I extends AbstractWeldInitiator, T extends AbstractBuilder<I, T>> {
+    public static abstract class AbstractBuilder<I extends AbstractWeldInitiator, T extends AbstractBuilder<I, T>> {
 
         protected final Weld weld;
 

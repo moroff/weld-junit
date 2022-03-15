@@ -57,6 +57,7 @@
       <module>junit4</module>
       <module>junit5</module>
       <module>junit-common</module>
+      <module>junit5-mockito</module>
    </modules>
 
    <dependencyManagement>

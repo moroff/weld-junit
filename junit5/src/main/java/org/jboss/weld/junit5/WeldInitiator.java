@@ -103,7 +103,7 @@ public class WeldInitiator extends AbstractWeldInitiator {
      * @see #of(Class...)
      */
     @SuppressWarnings("unchecked")
-    public static Builder from(Class<?>... beanClasses) {
+    public static AbstractBuilder<WeldInitiator, ?> from(Class<?>... beanClasses) {
         Weld weld = createWeld();
         for (Class<?> clazz : beanClasses) {
             if (Extension.class.isAssignableFrom(clazz)) {
@@ -122,7 +122,7 @@ public class WeldInitiator extends AbstractWeldInitiator {
      * @return a builder instance
      * @see #of(Weld)
      */
-    public static Builder from(Weld weld) {
+    public static AbstractBuilder<WeldInitiator, ?> from(Weld weld) {
         return new Builder(weld);
     }
 
@@ -132,7 +132,7 @@ public class WeldInitiator extends AbstractWeldInitiator {
      * @return a builder instance
      * @see #ofTestPackage()
      */
-    public static Builder fromTestPackage() {
+    public static AbstractBuilder<WeldInitiator, ?> fromTestPackage() {
         return new Builder(null);
     }
 
@@ -172,7 +172,7 @@ public class WeldInitiator extends AbstractWeldInitiator {
 
     }
 
-    private WeldInitiator(Weld weld, List<Object> instancesToInject, Set<Class<? extends Annotation>> scopesToActivate, Set<Bean<?>> beans,
+    protected WeldInitiator(Weld weld, List<Object> instancesToInject, Set<Class<? extends Annotation>> scopesToActivate, Set<Bean<?>> beans,
         Map<String, Object> resources, Function<InjectionPoint, Object> ejbFactory, Function<InjectionPoint, Object> persistenceUnitFactory,
         Function<InjectionPoint, Object> persistenceContextFactory) {
         super(weld, instancesToInject, scopesToActivate, beans, resources, ejbFactory, persistenceUnitFactory, persistenceContextFactory);

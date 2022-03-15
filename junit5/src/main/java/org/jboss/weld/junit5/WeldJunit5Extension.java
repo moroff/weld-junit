@@ -17,6 +17,7 @@
 package org.jboss.weld.junit5;
 
 import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.junit5.WeldInitiator.Builder;
 import org.jboss.weld.util.collections.ImmutableList;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -252,7 +253,7 @@ public class WeldJunit5Extension implements AfterAllCallback, BeforeAllCallback,
             // at this point we can be sure that either no or exactly one WeldInitiator was found
             if (initiator == null) {
                 Weld weld = WeldInitiator.createWeld();
-                WeldInitiator.Builder builder = WeldInitiator.from(weld);
+                WeldInitiator.Builder builder = (Builder) WeldInitiator.from(weld);
 
                 weldInit(context, weld, builder);
 
