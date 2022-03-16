@@ -3,6 +3,7 @@ package org.jboss.weld.junit5.mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
@@ -11,6 +12,8 @@ import org.jboss.weld.junit5.WeldInitiator;
 import org.jboss.weld.junit5.WeldJunit5Extension;
 import org.jboss.weld.junit5.WeldSetup;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
@@ -18,10 +21,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
-//@ExtendWith(MockitoExtension.class)
 @ExtendWith(WeldJunit5Extension.class)
 @ExtendWith(MockitoWeldExtension.class)
-class MockitoWeldExtensionTest {
+@TestInstance(Lifecycle.PER_CLASS)
+class MockitoWeldExtensionPerClassTest {
 
 	@WeldSetup
 	WeldInitiator weldInstantor = WeldInitiator //
@@ -69,7 +72,7 @@ class MockitoWeldExtensionTest {
 		});
 
 		// Assert
-		verify(interfaceMock);
+		verify(interfaceMock, times(2)).call(Mockito.anyString());
 	}
 
 }
